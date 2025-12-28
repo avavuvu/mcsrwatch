@@ -1,0 +1,35 @@
+date: December 28, 2025
+players:
+  FEINBERG:
+    elo: 2367
+    leaderboard: 13
+  INFUME:
+    elo: 2375
+    leaderboard: 11
+splits:
+  FEINBERG:
+    Completion: 8:23
+    Enter End: 7:27
+    Follow Ender Eye: 6:20
+    Blind: 4:52
+    Find Fortress: 3:40
+    Find Bastion: 1:32
+    Enter Nether: 1:23
+  INFUME:
+    Enter End: 8:17
+    Follow Ender Eye: 6:54
+    Blind: 5:41
+    Find Fortress: 4:32
+    Find Bastion: 2:41
+    Enter Nether: 2:33
+matches:
+  - winner: Feinberg
+    time: 8:23
+  - winner: Feinberg
+    time: 8:07
+  - winner: Feinberg
+    time: 11:03
+  - winner: Infume
+    time: 10:05
+  - winner: Infume
+    time: 7:58
