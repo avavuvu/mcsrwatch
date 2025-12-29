@@ -96,6 +96,10 @@ for(const match of versusJson.data.slice(0,5)) {
     })
 }
 
+const matchesFormatted = matches
+    .map(({winner, time}) => `${winner.toUpperCase()} ${time}`)
+    .join("\n")
+
 const formatter = new Intl.DateTimeFormat('en-US', {
   year: 'numeric',
   month: 'long',
@@ -103,7 +107,6 @@ const formatter = new Intl.DateTimeFormat('en-US', {
 });
 
 const date = new Date(json.data.date * 1000);
-
 
 const fileDateFormat = new Intl.DateTimeFormat('en-US', {
   year: 'numeric',
@@ -121,18 +124,27 @@ const outputData = {
     players: {
         [player1.nickname.toUpperCase()]: {
             elo: player1.eloRate,
-            leaderboard: player1.eloRank
+            leaderboard: player1.eloRank,
+            formatted: `#${player1.eloRank} – ${player1.eloRate}`
         },
         [player2.nickname.toUpperCase()]: {
             elo: player2.eloRate,
-            leaderboard: player2.eloRank
+            leaderboard: player2.eloRank,
+            formatted: `#${player2.eloRank} – ${player2.eloRate}`
         },
     },
     splits: {
-        [player1.nickname.toUpperCase()]: splits.get(player1.uuid),
-        [player2.nickname.toUpperCase()]: splits.get(player2.uuid),
+        named: {
+            [player1.nickname.toUpperCase()]: splits.get(player1.uuid),
+            [player2.nickname.toUpperCase()]: splits.get(player2.uuid),
+        },
+        flat: {
+            [player1.nickname.toUpperCase()]: Object.values(splits.get(player1.uuid)!).join("\n"),
+            [player2.nickname.toUpperCase()]: Object.values(splits.get(player2.uuid)!).join("\n"),
+        }
     },
-    matches
+    matches,
+    matchesFormatted
 }
 
 const player1Vod = json.data.vod.find(({uuid}) => uuid === player1.uuid)!
@@ -154,7 +166,7 @@ const outputString = stringify(outputData)
 const dirName = `${player1.nickname}-${player2.nickname}-${fileDateFormat}`
 console.log(dirName)
 
-fs.mkdir(dirName)
+fs.mkdir(dirName, { recursive: true })
 
 await fs.writeFile(
     `${dirName}/info.yaml`, 
