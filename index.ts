@@ -155,9 +155,9 @@ const getTwitchTime = (vodTime: number) => {
     const startTime = endTime - (completionTime / 1000)
 
     return `${
-        convertMs((startTime - 10) * 1000)
+        convertMs((startTime - 30) * 1000)
     }-${
-        convertMs((endTime + 24) * 1000)
+        convertMs((endTime + 30) * 1000)
     }` // 10-24 seconde leeway
 }
 
