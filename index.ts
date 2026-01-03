@@ -18,6 +18,9 @@ const playerNicknameMap = {
     [player2.uuid]: player2.nickname,
 }
 
+const player1Elo = json.data.changes[0].eloRate
+const player2Elo = json.data.changes[1].eloRate
+
 const importantEvents = [
     "story.enter_the_nether",
     "nether.find_bastion",
@@ -123,12 +126,14 @@ const outputData = {
     date: formatter.format(date),
     players: {
         [player1.nickname.toUpperCase()]: {
-            elo: player1.eloRate,
+            elo: player1Elo,
+            countryCode: player1.country,
             leaderboard: player1.eloRank,
             formatted: `#${player1.eloRank} – ${player1.eloRate}`
         },
         [player2.nickname.toUpperCase()]: {
-            elo: player2.eloRate,
+            elo: player2Elo,
+            countryCode: player2.country,
             leaderboard: player2.eloRank,
             formatted: `#${player2.eloRank} – ${player2.eloRate}`
         },
